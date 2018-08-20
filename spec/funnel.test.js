@@ -25,7 +25,19 @@ describe('The funnel function ', () => {
       expect(result).toEqual(-2);
     });
 
+    test('one number set', () => {
+      var result = api.funnel(new Set(testData.oneNumber), add, 0);
+
+      expect(result).toEqual(-2);
+    });
+
     test('more numbers', () => {
+      var result = api.funnel(testData.moreNumbers, add, -47);
+
+      expect(result).toEqual(0);
+    });
+
+    test('more numbers in a set', () => {
       var result = api.funnel(testData.moreNumbers, add, -47);
 
       expect(result).toEqual(0);

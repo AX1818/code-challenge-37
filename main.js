@@ -20,9 +20,15 @@ var api = {};
 */
 api.fanOut = (input, fn) => {
   /**
-   * Your implementation goes here
+   * This function assumes that either the 'input' argument is  valid data only or the 'fn' function 
+   * is able to handle invalid data properly.
    */
-  return [];
+  const values = [];
+  for (let v of input) {
+    values.push(fn(v));
+  }
+
+  return values;
 };
 
 /**
@@ -47,10 +53,12 @@ api.fanOut = (input, fn) => {
 
  */
 api.funnel = (input, fn, startValue) => {
-  /**
-   * Your implementation goes here
-   */
-  return 0;
+  let totalValue = startValue;
+  for (let v of input) {
+    totalValue = fn(totalValue, v);
+  }
+
+  return totalValue;
 };
 
 /**
@@ -73,10 +81,12 @@ api.funnel = (input, fn, startValue) => {
 
  */
 api.distill = (input, fn) => {
-  /**
-   * Your implementation goes here
-   */
-  return [];
+  const values = [];
+  for (let v of input) {
+    fn(v) && values.push(v);
+  }
+
+  return values;
 };
 
 /**
@@ -95,10 +105,7 @@ api.distill = (input, fn) => {
 
  */
 api.numberOfChars = (input) => {
-  /**
-   * Your implementation goes here
-   */
-  return 0;
+  return api.funnel(input, (t, s) => t + s.length, 0);
 };
 
 /**
@@ -119,10 +126,20 @@ api.numberOfChars = (input) => {
 
  */
 api.numberOfCertainChars = (input, c) => {
-  /**
-   * Your implementation goes here
-   */
-  return 0;
+  return api.funnel(input, (t, s) => t + countCharacter(s, c), 0);
 };
+
+function countCharacter(s, c) {
+  if (!s || !c) { 
+    return 0;
+  }
+
+  let cnt = 0;
+  for (let i = 0; i < s.length; i++) {
+    s[i] === c && ++cnt;
+  }
+
+  return cnt;
+}
 
 module.exports = api;

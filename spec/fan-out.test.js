@@ -23,10 +23,22 @@ describe('The fanOut function ', () => {
       expect(result).toEqual([4]);
     });
 
+    test('one number set', () => {
+      var result = api.fanOut(new Set(testData.oneNumber), square);
+
+      expect(result).toEqual([4]);
+    });
+
     test('more numbers', () => {
       var result = api.fanOut(testData.moreNumbers, square);
 
       expect(result).toEqual([961, 121, 729]);
+    });
+
+    test('more numbers in set', () => {
+      var result = api.fanOut(testData.moreNumbersSet, square);
+
+      expect(result).toEqual([961, 121, 729, 100]);
     });
   });
 });

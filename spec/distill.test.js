@@ -27,8 +27,20 @@ describe('The distill function ', () => {
       expect(result).toEqual([]);
     });
 
+    test('odd one number set', () => {
+      var result = api.distill(new Set(testData.oneNumber), isOdd);
+
+      expect(result).toEqual([]);
+    });
+
     test('more odd numbers', () => {
       var result = api.distill(testData.moreNumbers, isOdd);
+
+      expect(result).toEqual([31, -11, 27]);
+    });
+
+    test('more odd numbers in set', () => {
+      var result = api.distill(testData.moreNumbersSet, isOdd);
 
       expect(result).toEqual([31, -11, 27]);
     });
